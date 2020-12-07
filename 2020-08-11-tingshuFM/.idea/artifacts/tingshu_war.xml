@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="tingshu:war">
+    <output-path>$PROJECT_DIR$/听书FM-正式版/target</output-path>
+    <root id="archive" name="tingshu-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="tingshu:war exploded" />
+    </root>
+  </artifact>
+</component>

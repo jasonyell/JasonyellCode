@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- 项目基本信息 -->
+    <groupId>com.jasonyell</groupId>
+    <artifactId>tingshu</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- 以 war 形式打包，IDEA 会根据这个形式，自动生成 artifacts 选项 -->
+    <packaging>war</packaging>
+
+    <!-- 项目的编译器+ 字符集选项配置-->
+    <properties>
+        <encoding>utf-8</encoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <!-- 添加项目用到的依赖（需要的第三方 jar 包） -->
+    <dependencies>
+        <!-- 第一个依赖的作用是 提供 servlet 这套标准接口 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <!-- 这个 jar 包只在开发 + 编译阶段使用，运行阶段不需要 -->
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- 添加 JDBC 中的 MySQL Driver 的依赖 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.47</version>
+        </dependency>
+
+        <!--添加处理 JSON 数据的依赖  -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.62</version>
+        </dependency>
+    </dependencies>
+</project>
