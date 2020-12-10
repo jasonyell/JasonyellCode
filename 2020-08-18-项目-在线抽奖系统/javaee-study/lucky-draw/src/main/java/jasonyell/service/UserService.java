@@ -1,0 +1,28 @@
+package jasonyell.service;
+
+import jasonyell.exception.ClientException;
+import jasonyell.mapper.UserMapper;
+import jasonyell.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ * @program: javaee-study
+ * @description
+ * @author: JasonYell
+ * @create: 2020-12-11 03:15
+ **/
+@Service
+public class UserService {
+    @Autowired
+    private UserMapper userMapper;
+
+    public User login(User user) {
+        User exist = userMapper.login(user);
+
+        if (exist == null) {
+            throw new ClientException("USR001","用户名密码校验失败");
+        }
+        return exist;
+    }
+}
