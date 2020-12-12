@@ -10,4 +10,5 @@ import java.util.List;
 public interface AwardMapper extends BaseMapper<Award> {
 
 
+    List<Award> query();
 }

@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 奖项
@@ -41,4 +42,6 @@ public class Award extends BaseEntity {
      * 创建时间
      */
     private Date createTime;
+
+    private List<Integer> luckyMemberIds;
 }

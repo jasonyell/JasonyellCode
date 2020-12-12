@@ -1,8 +1,11 @@
 package jasonyell.config;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jasonyell.config.interceptoe.LoginInterceptor;
 import jasonyell.config.web.RequestResponseBodyMethodProcessorWrapper;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -18,8 +21,15 @@ import java.util.List;
 @Configuration
 public class SysConfig implements WebMvcConfigurer, InitializingBean{
 
+
     @Resource
     private RequestMappingHandlerAdapter adapter;
+    // SpringMVC 初始化操作时，就会注册的对象
+    @Autowired
+    private ObjectMapper objectMapper;
+
+
+
     // 和之前以 @ControllerAdvice +实现 ResponseBodyAdvice 接口，完成统一处理返回数据包装；无法解决返回值为null需要包装
     // 改用现在这种方式，可以解决返回 null 包装为自定义类
     @Override
@@ -33,6 +43,17 @@ public class SysConfig implements WebMvcConfigurer, InitializingBean{
             }
         }
         adapter.setReturnValueHandlers(handlers);
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginInterceptor(objectMapper))
+                .addPathPatterns("/api/**")    // /** 表示多级 任意匹配 *代表一级路径匹配
+                .excludePathPatterns("/api/user/login")
+                .excludePathPatterns("/api/user/register")
+                .excludePathPatterns("/api/user/logout");
+        // 判断添加一个前端资源请求拦截器，如果非登录页面（、*。html 排除/index.html）,如果没有登录，重定向到 /index.html
+
     }
 
     @Override

@@ -66,6 +66,7 @@ insert into award(name, count, award, setting_id) values ('特靠谱欢乐奖', 
 insert into award(name, count, award, setting_id) values ('特靠谱娱乐奖', 5, 'BMW X5', 1);
 insert into award(name, count, award, setting_id) values ('特靠谱励志奖', 20, '办公室一日游', 1);
 
+
 ## 数据字典：学生专业
 insert into member(name, no, user_id) values ('李寻欢', '水果刀', 1);
 insert into member(name, no, user_id) values ('郭靖', '降猪十八掌', 1);
@@ -162,3 +163,12 @@ insert into member(name, no, user_id) values ('缪荌荌', 'no87', 1);
 insert into member(name, no, user_id) values ('闻人幼丝', 'no88', 1);
 insert into member(name, no, user_id) values ('绍美曼', 'no89', 1);
 insert into member(name, no, user_id) values ('回访波', 'no90', 1);
+
+-- 插入抽奖记录
+insert into record(member_id,award_id) values(56,1);
+insert into record(member_id,award_id) values(1,2);
+insert into record(member_id,award_id) values(33,2);
+insert into record(member_id,award_id) values(25,3);
+insert into record(member_id,award_id) values(41,3);
+insert into record(member_id,award_id) values(84,3);
+insert into record(member_id,award_id) values(11,3);
