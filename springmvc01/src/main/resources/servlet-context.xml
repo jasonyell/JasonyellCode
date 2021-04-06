@@ -1,0 +1,117 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 开启扫描器 -->
+    <context:component-scan base-package="com.yell.springmvc.controller"/>
+    <!-- 使⽤默认的 Servlet 来响应静态⽂件 -->
+    <mvc:default-servlet-handler/>
+    <!-- 开启注解驱动-->
+    <mvc:annotation-driven/>
+    <!-- 配置视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          id="internalResourceViewResolver">
+        <!-- 前缀：在WEB-INF⽬录下的jsp⽬录下 -->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <!-- 后缀：以.jsp结尾的资源 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- mvc 请求映射 处理器与适配器配置 -->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter" />
+            <bean
+                    class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!--&lt;!&ndash; 拦截器配置:方式一 &ndash;&gt;-->
+    <!--<mvc:interceptors>-->
+        <!--&lt;!&ndash;默认拦截所有请求&ndash;&gt;-->
+        <!--<bean id="myInterceptor" class="com.yell.springmvc.interceptor.MyInterceptor01"/>-->
+    <!--</mvc:interceptors>-->
+
+    <!--&lt;!&ndash;  拦截器配置：方式二(推荐使用) &ndash;&gt;-->
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--&lt;!&ndash;设置拦截的资源路径 "/**"表示拦截所有的资源，拦截路径可以使用通配符&ndash;&gt;-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--&lt;!&ndash;设置不需要拦截的路径 支持通配符，可定义多个 &ndash;&gt;-->
+            <!--<mvc:exclude-mapping path="/url/*"/>-->
+            <!--<mvc:exclude-mapping path="/hello"/>-->
+            <!--&lt;!&ndash;设置拦截器&ndash;&gt;-->
+            <!--<bean id="myInterceptor01" class="com.yell.springmvc.interceptor.MyInterceptor01"/>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
+
+    <!--&lt;!&ndash;  拦截器配置：方式二(推荐使用) &ndash;&gt;-->
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--&lt;!&ndash;设置拦截的资源路径 "/**"表示拦截所有的资源，拦截路径可以使用通配符&ndash;&gt;-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--&lt;!&ndash;设置不需要拦截的路径 支持通配符，可定义多个 &ndash;&gt;-->
+            <!--<mvc:exclude-mapping path="/url/*"/>-->
+            <!--<mvc:exclude-mapping path="/hello"/>-->
+            <!--&lt;!&ndash;设置拦截器&ndash;&gt;-->
+            <!--<bean id="myInterceptor02" class="com.yell.springmvc.interceptor.MyInterceptor02"/>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
+
+    <!--
+        拦截器链
+            线配置的拦截器 先执行
+            先配置的拦截器的 preHandle 方法，先执行
+            线配置的拦截器的 postHandle 和 afterCompletion 方法，后执行
+     -->
+    <!--<mvc:interceptors>-->
+        <!--&lt;!&ndash;拦截器 一&ndash;&gt;-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--<bean id="myInterceptor01" class="com.yell.springmvc.interceptor.MyInterceptor01"/>-->
+        <!--</mvc:interceptor>-->
+        <!--&lt;!&ndash;拦截器 二&ndash;&gt;-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--<bean id="myInterceptor02" class="com.yell.springmvc.interceptor.MyInterceptor02"/>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
+
+    <!--非法请求拦截-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--拦截所有资源-->
+            <mvc:mapping path="/**"/>
+            <!--放行登陆操作-->
+            <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/uploadFile"/>
+            <mvc:exclude-mapping path="/uploadFiles"/>
+            <bean id="loginInterceptor" class="com.yell.springmvc.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!-- ⽂件上传 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 允许文件上传的最大尺寸 -->
+        <property name="maxUploadSize">
+            <value>104857600</value>
+        </property>
+        <!--
+            设置文件放入临时文件夹的最大限制。
+            此值是阈值，低于此值，则保存在内存中，如高于此值，则生成硬盘上的临时文件。
+        -->
+        <property name="maxInMemorySize">
+            <value>4096</value>
+        </property>
+    </bean>
+
+</beans>
