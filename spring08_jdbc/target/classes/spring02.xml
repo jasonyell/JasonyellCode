@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+    https://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--开启自动扫描，设置扫描包范围-->
+    <context:component-scan base-package="com.yell"/>
+
+    <!--加载properties加载文件-->
+    <context:property-placeholder location="jdbc.properties"/>
+
+    <!--创建 c3p0  数据源-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!-- properties 标签的values属性对应的是jdbc.properties中的值-->
+        <property name="driverClass" value="${jdbcDriver}"/>
+        <property name="jdbcUrl" value="${url}"/>
+        <property name="user" value="${user}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+
+    <!--&lt;!&ndash;DBCP 数据源&ndash;&gt;-->
+    <!--<bean id="dataSource1" class="BasicDataSource">-->
+        <!--<property name="driver" value="${jdbcDriver}"/>-->
+        <!--<property name="jdbcUrl" value="${url}"/>-->
+        <!--<property name="user" value="${user}"/>-->
+        <!--<property name="password" value="${password}"/>-->
+    <!--</bean>-->
+
+    <!--配置一个JdbcTemplate模板类 并注入一个数据源-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+
+    <!--
+        spring事务配置
+            1.添加tx和aop的命名空间
+            2.开启AOP自动代理
+            3.设置事务管理器,绑定数据源
+            4.设置事务通知,并绑定事务管理器
+            5.定义切面，设置切入点和通知
+    -->
+    <!--开启AOP自动代理-->
+    <aop:aspectj-autoproxy/>
+    <!--设置事务管理器-->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--数据源-->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--设置注解支持 Spring 注解式事务声明-->
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+</beans>
