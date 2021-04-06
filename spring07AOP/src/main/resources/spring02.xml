@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--开启自动扫描，并设置扫描范围-->
+    <context:component-scan base-package="com.yell"/>
+
+    <!--切面配置-->
+    <aop:config>
+        <aop:aspect ref="logCut02">
+            <!--定义切入点 id对应的是切面类中的切入点的方法-->
+            <aop:pointcut id="cut" expression="execution(* com.yell.service..*.*(..))"/>
+            <!--前置通知  方法执行前-->
+            <!--<aop:before method="before" pointcut-ref="cut"/>-->
+            <!--&lt;!&ndash;返回通知  方法正常执行后&ndash;&gt;-->
+            <!--<aop:after-returning method="afterReturn" pointcut-ref="cut"/>-->
+            <!--&lt;!&ndash;异常通知  方法抛出异常时&ndash;&gt;-->
+            <!--<aop:after-throwing method="throwReturn" throwing="e" pointcut-ref="cut"/>-->
+            <!--&lt;!&ndash;最终统治  方法执行后（无论是否有异常）&ndash;&gt;-->
+            <!--<aop:after method="after" pointcut-ref="cut"/>-->
+            <!--环绕通知-->
+            <aop:around method="around" pointcut-ref="cut"/>
+        </aop:aspect>
+    </aop:config>
+
+
+</beans>
