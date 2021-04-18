@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+        构造器注入
+            需要提供带参构造，构造器有几个参数，就设置几个constructor-arg 标签
+
+            通过 constructor-arg 标签设置的构造器的形参
+                name 形参名
+                ref bean 标签的id属性值
+                value 值
+                index 参数的下标 从 0 开始
+    -->
+    <bean id="typeDao" class="com.yell.dao.TypeDao"/>
+    <bean id="userDao" class="com.yell.dao.UserDao"/>
+
+    <!--单个参数-->
+    <!--<bean id="typeService" class="com.yell.service.TypeService">-->
+        <!--<constructor-arg name="typeDao" ref="typeDao"/>-->
+    <!--</bean>-->
+
+    <!--多个参数-->
+    <!--<bean id="typeService" class="com.yell.service.TypeService">-->
+        <!--<constructor-arg name="typeDao" ref="typeDao"/>-->
+        <!--<constructor-arg name="userDao" ref="userDao"/>-->
+    <!--</bean>-->
+
+    <bean id="typeService" class="com.yell.service.TypeService">
+        <constructor-arg name="typeDao" ref="typeDao"/>
+        <constructor-arg name="userDao" ref="userDao"/>
+        <constructor-arg name="name" value="jason"/>
+    </bean>
+
+</beans>

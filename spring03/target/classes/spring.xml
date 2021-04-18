@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+        构造器实例化
+            需要空构造
+     -->
+    <!--<bean id="userService" class="com.yell.service.UserService"/>-->
+    <!--<bean id="userDao" class="com.yell.dao.UserDao"></bean>-->
+
+    <!--
+        静态工厂实例化
+            1.提供静态工厂类
+            2.定义静态方法，并返回实例化好的bean对象
+
+            如何实例化
+                1.设置对应的bean的id属性值
+                2.设置class属性值为静态类的类路径
+                3.设置工厂调用的方法
+     -->
+    <!--<bean id="userService" class="com.yell.factory.StaticFactory" factory-method="createService"/>-->
+
+    <!--
+        实例化工厂 实例化
+            1.实例化工厂类，将工厂类交给IOC容器进行实例化
+            2.设置需要被实例化的bean标签 设置id 属性值没对应的工厂类，以及需要被调用的方法
+
+            factory-method: 工厂类中方法名
+            factory-bean：对应工厂类的id 属性
+    -->
+    <!-- 实例化工厂类 -->
+    <bean id="instanceFactory" class="com.yell.factory.InstanceFactory"/>
+    <!-- 实例化 Bean 对象 -->
+    <bean id="userDao" factory-method="createDao" factory-bean="instanceFactory"/>
+</beans>
+
