@@ -5,7 +5,6 @@
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="userService" class="com.yell.service.UserService"/>
-
     <bean id="userDao" class="com.yell.Dao.UserDao"/>
 
 
