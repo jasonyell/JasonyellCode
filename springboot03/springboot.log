@@ -1,0 +1,11 @@
+2021-04-11 14:36:49.389 debug 51464 --- [main] com.yell.StartApplication01              : Starting StartApplication01 on LAPTOP-FAR0B864 with PID 51464 (H:\BitWeb\workspaces\SpringStudy\springboot03\target\classes started by JasonYell in H:\BitWeb\workspaces\SpringStudy\springboot03)
+2021-04-11 14:36:49.395 debug 51464 --- [main] com.yell.StartApplication01              : The following profiles are active: prod
+2021-04-11 14:36:51.507 debug 51464 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2021-04-11 14:36:51.522 debug 51464 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-04-11 14:36:51.523 debug 51464 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.30]
+2021-04-11 14:36:51.666 debug 51464 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/sp01]   : Initializing Spring embedded WebApplicationContext
+2021-04-11 14:36:51.667 debug 51464 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1999 ms
+2021-04-11 14:36:51.986 debug 51464 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-11 14:36:52.262 debug 51464 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path '/sp01'
+2021-04-11 14:36:52.266 debug 51464 --- [main] com.yell.StartApplication01              : Started StartApplication01 in 4.345 seconds (JVM running for 8.319)
+2021-04-11 14:36:52.268 debug 51464 --- [main] com.yell.StartApplication01              : 正在使用日志...admin

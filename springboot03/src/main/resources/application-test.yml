@@ -1,0 +1,7 @@
+#测试环境
+server:
+  #项目服务器端口
+  port: 8989
+  servlet:
+    # 项目的访问路径
+    context-path: /sp

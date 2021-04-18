@@ -1,0 +1,7 @@
+# 正式环境
+server:
+  #项目服务器端口
+  port: 9090
+  servlet:
+    # 项目的访问路径
+    context-path: /sp01
