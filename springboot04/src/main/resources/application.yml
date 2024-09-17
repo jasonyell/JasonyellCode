@@ -1,0 +1,32 @@
+server:
+  # 端口
+  port: 8989
+  # 项目访问路径
+  servlet:
+    context-path: /sp
+
+
+#spring:
+#  freemarker:
+#    # 加载模板页面 resources 目录下的 views 目录中
+#    template-loader-path: classpath:/views/
+#    # 文件的后缀
+#    suffix: .ftl
+#    # 响应类型7
+#    content-type: text/html
+#    # 编码格式
+#    charset: UTF-8
+
+
+
+spring:
+#   thymeleaf 配置
+  thymeleaf:
+#     前缀（资源存放的目录）
+    prefix: classpath:/html/
+#    关闭缓存
+    cache: false
+
+  resources:
+    # 修改默认的静态资源目录 多个路径之间用逗号隔开
+    static-locations: classpath:/static/,classpath:/public,classpath:/user/

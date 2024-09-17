@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+        set 方式注入
+            1.要提供 set 方法
+            2.通过 property 属性设置 set方法
+                    name：字段名
+                    ref：对应的bean标签的id属性（赋的是bean对象时使用)
+                    value: 赋值
+
+    -->
+    <bean id="accountDao" class="com.yell.dao.AccountDao"/>
+
+    <bean id="accountService" class="com.yell.service.AccountService">
+        <!--set方法注入 javaBean对象-->
+        <property name="accountDao" ref="accountDao"/>
+
+        <!--基本类型-->
+        <property name="port" value="8080"/>
+
+        <!--字符串类型-->
+        <property name="host" value="localhost"/>
+
+        <!--list类型-->
+        <property name="list">
+            <list>
+                <value>上海</value>
+                <value>西安</value>
+                <value>北京</value>
+                <value>东京</value>
+            </list>
+        </property>
+
+        <!--map-->
+        <property name="map">
+            <map>
+                <entry>
+                    <key>
+                        <value>
+                            林俊杰
+                        </value>
+                    </key>
+                    <value>
+                        可惜没如果
+                    </value>
+                </entry>
+                <entry>
+                    <key><value>周杰伦</value></key>
+                    <value>晴天</value>
+                </entry>
+                <entry>
+                    <key><value>陈奕迅</value></key>
+                    <value>十年</value>
+                </entry>
+            </map>
+        </property>
+
+        <!--properties-->
+        <property name="properties">
+            <props>
+                <prop key="uname">root</prop>
+                <prop key="upwd">1234</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--
+        p名称空间的使用
+            引入对应的p名称的空间
+                xmlns:p="http://www.springframework.org/schema/p
+            使用p：字段名设置值
+            p:属性名：= "xxx" 引入常量值
+            p:属性名-ref:="xxx" 引入其他Bean对象的 id 属性值
+    -->
+    <bean id="accountService1" class="com.yell.service.AccountService"
+          p:accountDao-ref="accountDao"
+          p:host="admin">
+    </bean>
+
+</beans>

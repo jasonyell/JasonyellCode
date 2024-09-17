@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yell.ssm.dao.AccountDao" >
+    <resultMap id="BaseResultMap" type="com.yell.ssm.po.Account" >
+        <id column="account_id" property="id" jdbcType="INTEGER" />
+        <result column="account_name" property="aname" jdbcType="VARCHAR" />
+        <result column="account_type" property="type" jdbcType="VARCHAR" />
+        <result column="money" property="money" jdbcType="DOUBLE" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="DATE" />
+        <result column="update_time" property="updateTime" jdbcType="DATE" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+      account_id, account_name, account_type, money, create_time, update_time, remark
+    </sql>
+    <!--通过 id 查询用户记录 -->
+    <select id="queryAccountById" parameterType="int" resultType="com.yell.ssm.po.Account">
+        select
+          account_id id,
+          account_name aname,
+          account_type type,
+          money,
+          create_time createTime,
+          update_time updateTime,
+          remark
+        from
+          tb_account
+        where
+        account_id = #{identity }
+    </select>
+
+    <!-- 用过id删除账户记录-->
+    <delete id="deleteAccountById" parameterType="int">
+        delete from tb_account where account_id = #{id}
+    </delete>
+
+    <!-- 添加操作-->
+    <insert id="addAccount" parameterType="com.yell.ssm.po.Account" >
+        insert into
+          tb_account (account_name, account_type, money, create_time, update_time, remark)
+        values
+        (#{aname},#{type},#{money},now(),now(),#{remark})
+    </insert>
+
+    <!--更新操作-->
+    <update id="updateAccount" keyProperty="com.yell.ssm.po.Account">
+        update
+         tb_account
+        set
+          account_name = #{aname},
+          account_type = #{type},
+          money = #{money},
+          remark = #{remark},
+          update_time = now()
+        where
+          account_id = #{id}
+    </update>
+
+</mapper>

@@ -1,0 +1,81 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc
+ http://www.springframework.org/schema/mvc/spring-mvc.xsd
+ http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 开启扫描器 -->
+    <context:component-scan base-package="com.yell.ssm.controller" />
+    <!-- mvc 注解驱动 并添加json ⽀持 -->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <!-- 返回信息为字符串时 处理 -->
+            <bean
+                    class="org.springframework.http.converter.StringHttpMessageConverter"/>
+            <!-- 将对象转换为json 对象 -->
+            <bean
+                    class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!-- 使⽤默认的 Servlet 来响应静态⽂件 -->
+    <mvc:default-servlet-handler/>
+
+    <!-- 配置视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          id="internalResourceViewResolver">
+        <!-- 前缀：在WEB-INF⽬录下的jsp⽬录下 -->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <!-- 后缀：以.jsp结尾的资源 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- ⽂件上传 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 允许⽂件上传的最⼤尺⼨ -->
+        <property name="maxUploadSize">
+            <value>104857600</value>
+        </property>
+        <!--
+        设置⽂件放⼊临时⽂件夹的最⼤⼤⼩限制。
+        此值是阈值，低于此值，则保存在内存中，如⾼于此值，则⽣成硬盘上的临时⽂件。
+        -->
+        <property name="maxInMemorySize">
+            <value>4096</value>
+        </property>
+    </bean>
+
+
+    <!--
+        全局异常实现⽅式 Spring MVC 处理异常有 3 种⽅式：
+            1. 使⽤ Spring MVC 提供的简单异常处理器 SimpleMappingExceptionResolver
+            2. 实现 Spring 的异常处理接接口 HandlerExceptionResolver 自定义自己的异常处理器
+            3. 使⽤ @ExceptionHandler 注解实现异常处理
+    -->
+
+    <!-- 配置全局异常统一处理的 Bean （简单异常处理器） -->
+    <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
+        <!--&lt;!&ndash; ⻚⾯在转发时出现异常，设置默认的错误⻚⾯ （error代表的是⼀个视图） &ndash;&gt;-->
+        <!--<property name="defaultErrorView" value="error"></property>-->
+        <!--&lt;!&ndash; 异常发⽣时，设置异常的变量名 &ndash;&gt;-->
+        <!--<property name="exceptionAttribute" value="ex"></property>-->
+
+        <!--&lt;!&ndash;自定义异常映射地址&ndash;&gt;-->
+        <!--<property name="exceptionMappings">-->
+            <!--<props>-->
+                <!--&lt;!&ndash;如果抛出的是ParamsException异常，则转发到params_error页面&ndash;&gt;-->
+                <!--<prop key="con.yell.ssm.exceptions.ParamsExceptions">params_error</prop>-->
+                <!--<prop key="con.yell.ssm.exceptions.BusinessExceptions">business_error</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+
+
+</beans>

@@ -1,0 +1,32 @@
+# 在 spring boot项目中，默认读取全局配置没配置名固定为 application ，常用的两种配置文件 application.properties 或者 application.yml
+# 设置文件默认放在 resources 目录下
+
+#  1. k: v 表示键值对关系，冒号后面必须有一个空格
+#  2. 使用空格的缩进表示层级关系，空格数目不重要，只要是左对齐的一列数据，都是同一个层级的
+#  3. 大小写敏感
+#  4. 缩进时不允许使用 Tab 键，只允许使用空格。
+#  5. 松散表示，java 中对于驼峰命
+###设置服务器端口
+##server:
+##  #项目服务器端口
+##  port: 8989
+##  servlet:
+##    # 项目的访问路径
+##    context-path: /st名法，可用原名或使用-代替驼峰，如java中的lastName属性,在yml中使用lastName或 last-name都可正确映射。
+
+
+#   Profile 是 Spring 用来针对不同环境对不同配置提供支持的全局 Profile 配置使用 application-{profile}.yml，比如:application-dev.yml ，application-test.yml。
+#   通过在 application.yml 中设置 spring.profiles.active=test|dev|prod 来动态切换不同环境，设置指定的 profile 环境
+spring:
+  profiles:
+    # active 的值与配置文件"-"后的值对应
+    active: prod
+
+# 日志的格式
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger- %msg%n"
+    level: debug
+  file:
+    path: "."
+    name: "springboot.log"

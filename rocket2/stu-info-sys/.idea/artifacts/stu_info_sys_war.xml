@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="stu-info-sys:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="SIS.war">
-      <element id="artifact" artifact-name="stu-info-sys:war exploded" />
-    </root>
-  </artifact>
-</component>

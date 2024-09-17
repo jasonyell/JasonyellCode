@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+        springIOC 扫描器
+            Spring ioc 自动注入
+            1.准备环境
+                xmlns:context="http://www.springframework.org/schema/context"
+
+                http://www.springframework.org/schema/context
+                https://www.springframework.org/schema/context/spring-context.xsd"
+            2.开启自动扫描包的范围
+                <context:component-scan base-package="com.yell"/>
+                1.设置自动化扫描的范围
+                    如果bean对象未在指定报范围，及时声明了注解，也无法实例化
+                2.使用指定的注解（生命在类级别） bean对象的id属性米人事 类的首字母小写
+                    Dao层：
+                        @Repository
+                    Service层：
+                        @Service
+                    Controller层：
+                        @Controller
+                    任意类：
+                        @Component
+                注：开发过程中建议按照指定规则声明注解
+    -->
+    <!--自动扫描开启-->
+    <context:component-scan base-package="com.yell.jason"/>
+
+</beans>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf视图</title>
+    <!-- 引入静态资源 css-->
+    <link rel="stylesheet" href="css/user.css"/>
+</head>
+<body>
+<h3>hello springboot</h3>
+<!-- 获取请求域的值 -->
+<!--/*@thymesVar id="msg" type=""*/-->
+<h2 th:text="${msg}"></h2>
+
+<img src="images/tinm.jpeg">
+
+<!-- 引入静态资源 js-->
+<script type="text/javascript" ser="js/user.js"></script>
+</body>
+</html>
